@@ -39,7 +39,8 @@ let food = {
 	
 let score = 0;
 
-let d;
+let d = 0;
+let madness;
 
 document.addEventListener("keydown",direction);
 function direction(event) {
@@ -60,6 +61,35 @@ function direction(event) {
 		d = "down";
 		}
 		console.log(event.keyCode, d);
+	}
+	
+document.addEventListener("touch",frenzy);
+document.addEventListener("click",frenzy);
+function frenzy(madness) {
+	madness = Math.floor (Math.random() * 4)
+	if (d == 0) {
+			if (madness == 0) {left.play(); d = "left";} 
+			else if (madness == 1) {up.play(); d = "up";}
+			else if (madness == 2) {right.play(); d = "right";}
+			else {down.play(); d = "down";}
+		}
+	else if (d == "right"){
+		if (madness < 2) {up.play(); d = "up";} 
+		else {down.play(); d = "down";}
+		}
+	else if (d == "up"){
+		if (madness < 2) {left.play(); d = "left";} 
+		else {right.play(); d = "right";}
+		}
+	else if (d == "left"){
+		if (madness < 2) {up.play(); d = "up";} 
+		else {down.play(); d = "down";}
+		}
+	else if (d == "down"){
+		if (madness < 2) {left.play(); d = "left";} 
+		else {right.play(); d = "right";}
+		}
+
 	}
 	
 function collision(head,array) {
@@ -115,7 +145,7 @@ function draw(){
 	ctx.fillText(score, 2*box, 1.6*box);
 	}
 
-let game = setInterval (draw, 100);
+let game = setInterval (draw, 250);
 
 
 
